@@ -4,6 +4,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const proxy = require('http-proxy-middleware')
 const webpackConfig = require('../webpack/webpack.config.development')
+
 const { APP_PROXY_TARGET, APP_DEV_SERVER_PORT = 3000 } = require('../config')
 
 const app = express()
@@ -23,13 +24,13 @@ app.use(webpackHotMiddleware(compiler))
 app.use(
     '/api',
     proxy({
-        APP_PROXY_TARGET,
+        target: APP_PROXY_TARGET,
         changeOrigin: true
     })
 )
 
 const wsProxy = proxy({
-    APP_PROXY_TARGET,
+    target: APP_PROXY_TARGET,
     changeOrigin: true,
     ws: true,
     onProxyReqWs: proxyReq => {

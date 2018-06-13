@@ -31,6 +31,7 @@
     "react-router": "^4.3.1",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1",
+    "react-router-resolver": "^1.0.0-beta.13",
     "remotedev": "^0.2.7",
     "styled-components": "^3.3.2"
   },

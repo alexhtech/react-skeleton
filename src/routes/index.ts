@@ -1,19 +1,8 @@
-import { RouteConfig } from 'react-router-config'
+import { RouteConfig } from 'react-router-resolver'
 import RootComponent from '../components/RootComponent'
 import Counter from '../components/Counter'
 
-interface IRouteConfig extends RouteConfig {
-    preload?: () => any
-    preloadOptions?: {
-        alwaysReload?: boolean
-        reloadOnQueryChange?: boolean
-        reloadOnParamsChange?: boolean
-    }
-    onEnter?: () => any
-    routes?: IRouteConfig[]
-}
-
-const routes: IRouteConfig[] = [
+const routes: RouteConfig[] = [
     {
         path: '/',
         component: RootComponent,
