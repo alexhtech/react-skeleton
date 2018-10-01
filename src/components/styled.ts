@@ -7,6 +7,8 @@ export interface IStyledButton {
 const StyledButton = styled<IStyledButton, any>('button')`
     background-color: blue;
     padding: 10px;
+    color: white;
+    font-size: 14px;
     ${({ red }: IStyledButton) =>
         red &&
         `

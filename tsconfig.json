@@ -17,11 +17,49 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "experimentalDecorators": true,
-    "declaration": true,
-    "declarationDir": "./declarations"
+    "declaration": false,
+    "baseUrl": ".",
+    "paths": {
+      "@common": [
+        "./src/components/common"
+      ],
+      "@common/*": [
+        "./src/components/common/*"
+      ],
+      "@constants": [
+        "./src/constants"
+      ],
+      "@stores/*": [
+        "./src/stores/*"
+      ],
+      "@stores": [
+        "./src/stores"
+      ],
+      "@models/*": [
+        "./src/models/*"
+      ],
+      "@models": [
+        "./src/models"
+      ],
+      "@utils":[
+        "./src/utils"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@config":[
+        "./config"
+      ],
+      "@api":[
+        "./src/api"
+      ],
+      "@api/*": [
+        "./src/api/*"
+      ]
+    }
   },
   "include": [
     "./src/**/*",
-    "./config/index.ts"
+    "./config/*"
   ]
 }

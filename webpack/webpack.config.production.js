@@ -1,8 +1,9 @@
 const merge = require('webpack-merge')
 const { resolve } = require('path')
-const { default: base } = require('./webpack.config.base')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const base = require('./webpack.config.base')
+const TerserPlugin = require('terser-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const {
     ENTRY,
@@ -11,7 +12,7 @@ const {
     INDEX_PATH = '../public/index.html'
 } = process.env
 
-module.exports = merge(base, {
+const production = merge(base, {
     mode: 'production',
     entry: ENTRY ? `./src/components/App/${ENTRY}` : './src/index',
     output: {
@@ -26,18 +27,19 @@ module.exports = merge(base, {
                 test: /\.(ts|tsx)$/,
                 exclude: /(node_modules)/,
                 use: {
-                    loader: 'awesome-typescript-loader',
+                    loader: 'ts-loader',
                     options: {
-                        configFileName: 'tsconfig.prod.json'
+                        configFile: resolve(__dirname, '../tsconfig.prod.json'),
+                        transpileOnly: true
                     }
                 }
             }
         ]
     },
+    optimization: {
+        minimizer: [new TerserPlugin()]
+    },
     plugins: [
-        new UglifyJsPlugin({
-            sourceMap: true
-        }),
         new HtmlWebpackPlugin({
             title: 'Powered by react',
             hash: true,
@@ -45,6 +47,12 @@ module.exports = merge(base, {
             filename: resolve(__dirname, INDEX_PATH),
             chunks: ['main'],
             chunksSortMode: 'none'
+        }),
+        new ForkTsCheckerWebpackPlugin({
+            tsconfig: resolve(__dirname, '../tsconfig.prod.json'),
+            async: false
         })
     ]
 })
+
+module.exports = production

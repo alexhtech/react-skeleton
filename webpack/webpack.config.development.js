@@ -1,18 +1,19 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const base = require('./webpack.config.base')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
-const { default: base } = require('./webpack.config.base')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
-module.exports = merge(base, {
+const development = merge(base, {
     mode: 'development',
-    entry: ['webpack-hot-middleware/client', './src/index'],
+    entry: ['@babel/polyfill', 'webpack-hot-middleware/client', './src/index'],
     output: {
         filename: '[name].js',
         publicPath: '/dist/',
         chunkFilename: '[name].chunk.js'
     },
-    devtool: false,
+    devtool: 'source-map',
     devServer: {
         hot: true,
         contentBase: resolve(__dirname, './public'),
@@ -25,18 +26,33 @@ module.exports = merge(base, {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
-                exclude: /(node_modules)/,
-                use: [
-                    {
-                        loader: 'awesome-typescript-loader',
-                        options: {
-                            configFileName: 'tsconfig.dev.json'
-                        }
-                    },
-                    'babel-loader'
-                ]
+                loader: 'babel-loader',
+                options: {
+                    cacheDirectory: true,
+                    babelrc: false,
+                    presets: [
+                        ['@babel/preset-env', { targets: { browsers: 'last 2 versions' } }],
+                        '@babel/preset-typescript',
+                        '@babel/preset-react'
+                    ],
+                    plugins: [
+                        ['@babel/plugin-proposal-decorators', { legacy: true }],
+                        ['@babel/plugin-proposal-class-properties', { loose: true }],
+                        'react-hot-loader/babel'
+                    ]
+                }
             }
         ]
     },
-    plugins: [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin(), new ProgressBarPlugin()]
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
+        new ProgressBarPlugin(),
+        new ForkTsCheckerWebpackPlugin({
+            tsconfig: resolve(__dirname, '../tsconfig.dev.json'),
+            async: true
+        })
+    ]
 })
+
+module.exports = development

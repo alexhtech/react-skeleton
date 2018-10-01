@@ -5,26 +5,26 @@ import Resolver from 'react-router-resolver'
 import { Router } from 'react-router'
 import { Provider } from 'mobx-react'
 import { History } from 'history'
-import { IRootStore } from '../stores'
+import { RootStoreType } from '../stores'
 import routes from '../routes'
 import { ROUTER_INIT, ROUTER_LOCATION_CHANGE } from '../constants'
 
 interface IApp {
     history: History
-    store: IRootStore
+    store: RootStoreType
 }
 
-const enum Status {
+enum Status {
     loading = 0,
     loaded,
     fail
 }
 
-interface State {
+interface IState {
     status: Status
 }
 
-class App extends React.Component<IApp, State> {
+class App extends React.Component<IApp, IState> {
     state = {
         status: 0
     }
@@ -57,6 +57,7 @@ class App extends React.Component<IApp, State> {
                 console.error(e)
                 this.setState({ status: 2 })
             }
+            return null // there can be loader
         }
 
         if (this.state.status === 2) return 'Error'

@@ -1,22 +1,22 @@
-import { types, getEnv } from 'mobx-state-tree'
 import { Location } from 'history'
+import { getEnv, types } from 'mobx-state-tree'
 import { ROUTER_INIT, ROUTER_LOCATION_CHANGE } from '../constants'
 import LocationModel, { ILocation } from '../models/Location'
 
-export default types
+const RouterStore = types
     .model('RouterStore', {
         location: types.maybe(LocationModel),
         state: types.maybe(types.enumeration('State', ['loading', 'loaded', 'fail']))
     })
     .actions(self => ({
+        onFail: () => {
+            self.state = 'fail'
+        },
         onStart: () => {
             self.state = 'loading'
         },
         onSuccess: () => {
             self.state = 'loaded'
-        },
-        onFail: () => {
-            self.state = 'fail'
         },
         [ROUTER_INIT]: (location: Location) => {
             self.location = location as ILocation
@@ -33,3 +33,6 @@ export default types
             self.location = location as ILocation
         }
     }))
+
+export type RouterStoreType = typeof RouterStore.Type
+export default RouterStore

@@ -11,5 +11,5 @@ const RootStore = types.model('RootStore', {
     })
 })
 
-export type IRootStore = typeof RootStore.Type
+export type RootStoreType = typeof RootStore.Type
 export default RootStore

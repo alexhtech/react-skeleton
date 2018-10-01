@@ -1,6 +1,6 @@
 import { RouteConfig } from 'react-router-resolver'
 import RootComponent from '../components/RootComponent'
-import Counter from '../components/Counter'
+import Test from '../components/Test'
 
 const routes: RouteConfig[] = [
     {
@@ -8,8 +8,8 @@ const routes: RouteConfig[] = [
         component: RootComponent,
         routes: [
             {
-                path: '/counter',
-                component: Counter
+                path: '/',
+                component: Test
             }
         ]
     }
