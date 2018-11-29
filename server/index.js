@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const proxy = require('http-proxy-middleware')
+const path = require('path')
 const webpackConfig = require('../webpack/webpack.config.development')
 
 const { APP_PROXY_TARGET, APP_DEV_SERVER_PORT = 3000 } = require('../config')
@@ -15,7 +16,8 @@ app.use(
         publicPath: webpackConfig.output.publicPath,
         hot: true,
         stats: {
-            colors: true
+            colors: true,
+            children: false
         },
         noInfo: true
     })
@@ -42,16 +44,17 @@ app.use('/ws', wsProxy)
 
 app.use('/static', express.static('./public/static'))
 
-app.use((req, res) => {
-    res.send(`
-    <!DOCTYPE html>
-        <html>
-        <body>
-            <div id='react-root'></div>
-            <script src="/dist/main.js"></script>
-        </body>
-        </html>
-    `)
+app.use('*', function(req, res) {
+    interval = setInterval(() => {
+        compiler.outputFileSystem.readFile(path.join(compiler.outputPath, 'index.html'), function(err, file) {
+            if (!err) {
+                res.set('content-type', 'text/html')
+                res.send(file)
+                res.end()
+                clearInterval(interval)
+            }
+        })
+    }, 10)
 })
 
 const server = app.listen(APP_DEV_SERVER_PORT, () => {

@@ -4,7 +4,7 @@ export interface IStyledButton {
     red?: boolean
 }
 
-const StyledButton = styled<IStyledButton, any>('button')`
+const StyledButton = styled.button<IStyledButton>`
     background-color: blue;
     padding: 10px;
     color: white;

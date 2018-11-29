@@ -5,9 +5,8 @@ import Resolver from 'react-router-resolver'
 import { Router } from 'react-router'
 import { Provider } from 'mobx-react'
 import { History } from 'history'
-import { RootStoreType } from '../stores'
+import { RootStoreType } from '../models/root.store'
 import routes from '../routes'
-import { ROUTER_INIT, ROUTER_LOCATION_CHANGE } from '../constants'
 
 interface IApp {
     history: History
@@ -47,10 +46,11 @@ class App extends React.Component<IApp, IState> {
         if (this.state.status === 0) {
             if (!this.resolver) this.createResolver()
             this.resolver.routes = routes
+            this.resolver.addHelper('store', store)
             try {
                 this.resolver.init(history.location).then(() => {
-                    history.listen(store.router[ROUTER_LOCATION_CHANGE])
-                    store.router[ROUTER_INIT](history.location)
+                    history.listen(store.router.locationChanged)
+                    store.router.init(history.location)
                     this.setState({ status: 1 })
                 })
             } catch (e) {

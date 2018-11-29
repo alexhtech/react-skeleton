@@ -1,17 +1,21 @@
 const webpack = require('webpack')
 const { resolve } = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
         alias: {
             '@common': resolve(__dirname, '../src/components/common/'),
+            '@assets': resolve(__dirname, '../assets/'),
             '@constants': resolve(__dirname, '../src/constants/'),
-            '@stores': resolve(__dirname, '../src/stores'),
-            '@models': resolve(__dirname, '../src/models'),
+            '@models': resolve(__dirname, '../src/models/'),
             '@utils': resolve(__dirname, '../src/utils/'),
             '@config': resolve(__dirname, '../config/'),
-            '@api': resolve(__dirname, '../src/api/')
+            '@api': resolve(__dirname, '../src/api/'),
+            '@ga': resolve(__dirname, '../src/ga/')
         }
     },
     module: {
@@ -74,8 +78,18 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: process.env.NODE_ENV === 'development' ? '"development"' : '"production"'
+                NODE_ENV: isDev ? '"development"' : '"production"'
             }
+        }),
+        new HtmlWebpackPlugin({
+            hash: true,
+            template: resolve(__dirname, '../src/index.ejs'),
+            templateParameters: {
+                title: 'React skeleton'
+            },
+            filename: resolve(__dirname, isDev ? '../server/index.html' : '../public/index.html'),
+            chunks: ['main'],
+            chunksSortMode: 'none'
         })
     ]
 }

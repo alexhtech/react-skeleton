@@ -1,6 +1,6 @@
 import { RouteConfig } from 'react-router-resolver'
 import RootComponent from '../components/RootComponent'
-import Test from '../components/Test'
+import Home from '../components/Home'
 
 const routes: RouteConfig[] = [
     {
@@ -9,7 +9,8 @@ const routes: RouteConfig[] = [
         routes: [
             {
                 path: '/',
-                component: Test
+                exact: true,
+                component: Home
             }
         ]
     }

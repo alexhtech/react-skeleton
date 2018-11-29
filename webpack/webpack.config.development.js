@@ -9,6 +9,7 @@ const development = merge(base, {
     mode: 'development',
     entry: ['@babel/polyfill', 'webpack-hot-middleware/client', './src/index'],
     output: {
+        path: resolve(__dirname, '../server/'),
         filename: '[name].js',
         publicPath: '/dist/',
         chunkFilename: '[name].chunk.js'
@@ -16,7 +17,7 @@ const development = merge(base, {
     devtool: 'source-map',
     devServer: {
         hot: true,
-        contentBase: resolve(__dirname, './public'),
+        contentBase: resolve(__dirname, '../public'),
         publicPath: '/'
     },
     optimization: {

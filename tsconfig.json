@@ -3,13 +3,15 @@
     "outDir": "./dist/",
     "module": "esnext",
     "target": "es5",
-    "lib": ["es6", "dom"],
+    "lib": ["es6", "dom", "es2017.object"],
     "sourceMap": true,
     "allowJs": false,
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": ".",
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
@@ -28,12 +30,6 @@
       ],
       "@constants": [
         "./src/constants"
-      ],
-      "@stores/*": [
-        "./src/stores/*"
-      ],
-      "@stores": [
-        "./src/stores"
       ],
       "@models/*": [
         "./src/models/*"
@@ -55,6 +51,12 @@
       ],
       "@api/*": [
         "./src/api/*"
+      ],
+      "@ga":[
+        "./src/ga"
+      ],
+      "@ga/*": [
+        "./src/ga/*"
       ]
     }
   },
