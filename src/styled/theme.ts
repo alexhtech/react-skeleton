@@ -1,0 +1,3 @@
+export const defaultTheme = {
+    // theme is going to be here...
+}

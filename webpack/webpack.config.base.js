@@ -8,6 +8,7 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
         alias: {
+            '@styled-components': resolve(__dirname, '../src/styled/'),
             '@common': resolve(__dirname, '../src/components/common/'),
             '@assets': resolve(__dirname, '../srs/assets/'),
             '@store': resolve(__dirname, '../src/store/'),

@@ -22,6 +22,12 @@
     "declaration": false,
     "baseUrl": ".",
     "paths": {
+      "@styled-components":[
+        "./src/styled"
+      ],
+      "@styled-components/*":[
+        "./src/styled/*"
+      ],
       "@common": [
         "./src/components/common"
       ],
