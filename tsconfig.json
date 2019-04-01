@@ -28,14 +28,11 @@
       "@common/*": [
         "./src/components/common/*"
       ],
-      "@constants": [
-        "./src/constants"
+      "@store": [
+        "./src/store"
       ],
-      "@models/*": [
-        "./src/models/*"
-      ],
-      "@models": [
-        "./src/models"
+      "@store/*": [
+        "./src/store/*"
       ],
       "@utils":[
         "./src/utils"
@@ -52,12 +49,25 @@
       "@api/*": [
         "./src/api/*"
       ],
-      "@ga":[
-        "./src/ga"
+      "@assets":[
+        "./src/assets"
       ],
-      "@ga/*": [
-        "./src/ga/*"
-      ]
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@pages":[
+        "./src/pages"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
+      ],
+      "@components":[
+        "./src/components"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      
     }
   },
   "include": [

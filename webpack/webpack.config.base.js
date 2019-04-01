@@ -9,13 +9,13 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
         alias: {
             '@common': resolve(__dirname, '../src/components/common/'),
-            '@assets': resolve(__dirname, '../assets/'),
-            '@constants': resolve(__dirname, '../src/constants/'),
-            '@models': resolve(__dirname, '../src/models/'),
+            '@assets': resolve(__dirname, '../srs/assets/'),
+            '@store': resolve(__dirname, '../src/store/'),
             '@utils': resolve(__dirname, '../src/utils/'),
             '@config': resolve(__dirname, '../config/'),
             '@api': resolve(__dirname, '../src/api/'),
-            '@ga': resolve(__dirname, '../src/ga/')
+            '@pages': resolve(__dirname, '../src/pages/'),
+            '@components': resolve(__dirname, '../src/components/')
         }
     },
     module: {

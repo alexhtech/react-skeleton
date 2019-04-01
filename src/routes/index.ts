@@ -1,16 +1,22 @@
-import { RouteConfig } from 'react-router-resolver'
-import RootComponent from '../components/RootComponent'
-import Home from '../components/Home'
+import { RouteConfig } from 'react-router-config'
+import Root from '@pages'
+import Layout from '@pages/Layout'
+import MainPage from '@pages/Layout/Main'
 
 const routes: RouteConfig[] = [
     {
         path: '/',
-        component: RootComponent,
+        component: Root,
         routes: [
             {
                 path: '/',
-                exact: true,
-                component: Home
+                component: Layout,
+                routes: [
+                    {
+                        path: '/',
+                        component: MainPage
+                    }
+                ]
             }
         ]
     }

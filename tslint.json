@@ -3,7 +3,7 @@
     "rules": {
         "max-line-length": {
             "options": [
-                120
+                130
             ]
         },
         "new-parens": true,
@@ -28,10 +28,20 @@
         "arrow-parens": false,
         "member-access": false,
         "curly": false,
-        "ordered-imports": false,
         "object-literal-sort-keys": false,
         "no-var-requires": false,
-        "object-literal-key-quotes": [true, "as-needed"]
-
+        "object-literal-key-quotes": [true, "as-needed"],
+        "ordered-imports": [true, {
+            "grouped-imports": true,
+            "import-sources-order": "any",
+            "named-imports-order": "any",
+            "module-source-path": "full"
+        }]
+    },
+    "linterOptions": {
+        "exclude": [
+            "*.json",
+            "**/*.json"
+        ]
     }
 }

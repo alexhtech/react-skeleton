@@ -8,6 +8,11 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const development = merge(base, {
     mode: 'development',
     entry: ['@babel/polyfill', 'webpack-hot-middleware/client', './src/index'],
+    resolve: {
+        alias: {
+            'react-dom': '@hot-loader/react-dom'
+        }
+    },
     output: {
         path: resolve(__dirname, '../server/'),
         filename: '[name].js',

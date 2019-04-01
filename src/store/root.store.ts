@@ -1,4 +1,5 @@
 import { types } from 'mobx-state-tree'
+
 import Router from './router.store'
 
 const RootStore = types
