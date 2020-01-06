@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    "@babel/plugin-proposal-optional-chaining",
+    "react-hot-loader/babel"
+  ],
+  "presets": [
+    ["@babel/preset-env", { "targets": { "browsers": "last 2 versions" } }],
+    "@babel/preset-typescript",
+    "@babel/preset-react"
+  ]
+}

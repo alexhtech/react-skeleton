@@ -1,0 +1,7 @@
+{
+    "src/**/*.{ts,tsx}": [
+      "yarn code:lint --fix",
+      "pretty-quick --staged",
+      "git add"
+    ]
+}

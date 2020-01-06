@@ -1,21 +1,15 @@
-import * as React from 'react'
-import { render } from 'react-dom'
-import { createBrowserHistory } from 'history'
-import { defaults } from 'data-fetcher'
+import React from 'react';
+import { render } from 'react-dom';
+import { createBrowserHistory } from 'history';
+import App from './App';
 
-import config from '../config'
-
-import App from './components/App'
-import { createStore } from './store'
-
-const history = createBrowserHistory()
-const store = createStore({}, { history })
-
-// setup fetcher
-defaults.baseUrl = config.APP_API_BASE_URL
+const history = createBrowserHistory();
 
 function renderApp() {
-    render(<App history={history} store={store} />, document.getElementById('react-root'))
+  render(
+    <App history={history} />,
+    window.document.getElementById('react-root')
+  );
 }
 
-renderApp()
+renderApp();

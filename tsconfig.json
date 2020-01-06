@@ -20,64 +20,17 @@
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "declaration": false,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@styled-components":[
-        "./src/styled"
-      ],
-      "@styled-components/*":[
-        "./src/styled/*"
-      ],
-      "@common": [
-        "./src/components/common"
-      ],
-      "@common/*": [
-        "./src/components/common/*"
-      ],
-      "@store": [
-        "./src/store"
-      ],
-      "@store/*": [
-        "./src/store/*"
-      ],
-      "@utils":[
-        "./src/utils"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
-      "@config":[
-        "./config"
-      ],
-      "@api":[
-        "./src/api"
-      ],
-      "@api/*": [
-        "./src/api/*"
-      ],
-      "@assets":[
-        "./src/assets"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@pages":[
-        "./src/pages"
-      ],
-      "@pages/*": [
-        "./src/pages/*"
-      ],
-      "@components":[
-        "./src/components"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      
+      "@components": ["components"],
+      "@components/*": ["components/*"],
+      "@constans": ["constans"],
+      "@constans/*": ["constans/*"],
+      "@pages": ["pages"],
+      "@pages/*": ["pages/*"],
+      "@routes": ["routes"],
+      "@routes/*": ["routes/*"]
     }
   },
-  "include": [
-    "./src/**/*",
-    "./config/*"
-  ]
+  "include": ["./src/**/*"]
 }
