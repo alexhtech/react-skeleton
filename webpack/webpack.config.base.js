@@ -26,6 +26,7 @@ module.exports = {
         test: /\.(j|t)sx?$/,
         enforce: 'pre',
         loader: 'eslint-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.(j|t)sx?$/,
@@ -33,6 +34,7 @@ module.exports = {
         options: {
           cacheDirectory: isDev,
         },
+        exclude: /node_modules/,
       },
       {
         test: /\.(png|jpg|gif)$/,
