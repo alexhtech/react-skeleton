@@ -5,7 +5,7 @@
     "target": "es5",
     "lib": ["es6", "dom", "es2017.object"],
     "sourceMap": true,
-    "allowJs": false,
+    "allowJs": true,
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": ".",
@@ -20,17 +20,19 @@
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "declaration": false,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@components": ["components"],
-      "@components/*": ["components/*"],
-      "@constans": ["constans"],
-      "@constans/*": ["constans/*"],
-      "@pages": ["pages"],
-      "@pages/*": ["pages/*"],
-      "@routes": ["routes"],
-      "@routes/*": ["routes/*"]
+      "@common": ["./src/components/common"],
+      "@common/*": ["./src/components/common/*"],
+      "@assets": ["./src/assets"],
+      "@assets/*": ["./src/assets/*"],
+      "@pages": ["./src/pages"],
+      "@pages/*": ["./src/pages/*"],
+      "@components": ["./src/components"],
+      "@components/*": ["./src/components/*"],
+      "@hooks": ["./src/hooks"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*", "./config/*"]
 }

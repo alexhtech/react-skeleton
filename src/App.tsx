@@ -1,20 +1,23 @@
-import React from 'react';
-import { renderRoutes } from 'react-router-config';
-import routes from '@routes';
-import { Router } from 'react-router';
-import { History } from 'history';
-import { hot } from 'react-hot-loader/root';
+import * as React from 'react'
+import { hot } from 'react-hot-loader/root'
+import { renderRoutes } from 'react-router-config'
+import { Router } from 'react-router'
+import { History } from 'history'
 
-interface IProps {
-  history: History;
+import routes from './routes'
+import GlobalStyle from './globalStyle'
+
+interface Props {
+  history: History
 }
 
-function App(props: IProps) {
+function App({ history }: Props) {
   return (
-    <div>
-      <Router history={props.history}>{renderRoutes(routes)}</Router>
-    </div>
-  );
+    <>
+      <GlobalStyle />
+      <Router history={history}>{renderRoutes(routes)}</Router>
+    </>
+  )
 }
 
-export default hot(App);
+export default hot(App)
