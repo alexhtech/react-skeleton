@@ -1,9 +1,8 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
-
 const base = require('./webpack.config.base')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 const development = merge(base, {
   mode: 'development',

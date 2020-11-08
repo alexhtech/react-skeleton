@@ -38,6 +38,6 @@ app.use('*', function (req, res) {
   }, 10)
 })
 
-const server = app.listen(APP_DEV_SERVER_PORT, () => {
+app.listen(APP_DEV_SERVER_PORT, () => {
   console.log(`Page server is listening on port ${APP_DEV_SERVER_PORT}!`)
 })

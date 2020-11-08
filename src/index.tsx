@@ -3,11 +3,12 @@ import { render } from 'react-dom'
 import { createBrowserHistory } from 'history'
 
 import App from './App'
+import { apolloClient } from '@graphql'
 
 const history = createBrowserHistory()
 
 function renderApp() {
-  render(<App history={history} />, document.getElementById('react-root'))
+  render(<App history={history} apolloClient={apolloClient} />, document.getElementById('react-root'))
 }
 
 renderApp()

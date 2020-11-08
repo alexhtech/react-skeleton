@@ -3,38 +3,39 @@ const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
-const getClientEnvironment = require('./env')
-
-const env = getClientEnvironment()
-
-const isDev = env.raw.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    extensions: ['.tsx', '.ts', '.js'],
     alias: {
       '@common': resolve(__dirname, '../src/components/common/'),
       '@assets': resolve(__dirname, '../src/assets/'),
+      '@utils': resolve(__dirname, '../src/utils/'),
+      '@config': resolve(__dirname, '../config/'),
       '@pages': resolve(__dirname, '../src/pages/'),
       '@components': resolve(__dirname, '../src/components/'),
+      '@graphql': resolve(__dirname, '../src/graphql/'),
       '@hooks': resolve(__dirname, '../src/hooks/'),
     },
   },
   module: {
     rules: [
       {
-        test: /\.(j|t)sx?$/,
+        test: /\.(ts|tsx)$/,
         enforce: 'pre',
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
+        loader: 'tslint-loader',
+        options: {
+          emitErrors: false,
+          failOnHint: false,
+        },
       },
       {
-        test: /\.(j|t)sx?$/,
+        test: /\.(ts|tsx)$/,
         loader: 'babel-loader',
         options: {
           cacheDirectory: isDev,
         },
-        exclude: /node_modules/,
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -83,17 +84,18 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin(env.stringified),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: isDev ? '"development"' : '"production"',
+      },
+    }),
     new HtmlWebpackPlugin({
       hash: true,
       template: resolve(__dirname, '../src/index.ejs'),
       templateParameters: {
-        title: 'React skeleton',
+        title: 'Happy project',
       },
-      filename: resolve(
-        __dirname,
-        env.raw.NODE_ENV === 'development' ? '../server/index.html' : '../public/index.html'
-      ),
+      filename: resolve(__dirname, isDev ? '../server/index.html' : '../public/index.html'),
       chunks: ['main'],
       chunksSortMode: 'none',
     }),
