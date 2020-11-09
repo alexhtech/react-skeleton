@@ -1,34 +1,12 @@
-import Input from '@common/FormElements/Input'
-import localStorageService from '@utils/localStorage'
-import React, { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { useHistory } from 'react-router'
+import React from 'react'
+import Form from './Form'
 
-interface Values {
-  email: string
-  password: string
-}
 function Login() {
-  const { register, handleSubmit, errors } = useForm<Values>()
-  const history = useHistory()
-
-  useEffect(() => {
-    localStorageService.token = null
-  }, [])
-
-  function onSubmit(values: Values) {
-    console.log(values)
-    localStorageService.token =
-      'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDQ5NTQyNjMsInN1YiI6NTQwLCJ1aWQiOiIyZTY0NzFlNC1iNjI3LTQ4YzYtYWQwZS01MTA0YWZkMGQ5MzYiLCJydWlkIjoiMDhhMTNjNDQtYmYzYi00Y2E2LThhNDYtZDZhYjNmNmQyMjFhIn0.2i5WftOc3D6REeKVVDkMHKdr4PHW6Wjb9jMNPr2PIZw'
-    history.replace('/')
-  }
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Input name="email" register={register} rules={{ required: true }} error={errors.email} />
-      <Input name="password" register={register} rules={{ required: true }} error={errors.password} />
-      <button type="submit">submit</button>
-    </form>
+    <p>
+      <h1>Login page</h1>
+      <Form />
+    </p>
   )
 }
 

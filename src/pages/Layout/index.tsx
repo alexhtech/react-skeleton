@@ -1,31 +1,32 @@
 import React, { useLayoutEffect } from 'react'
 import { RouteConfigComponentProps, renderRoutes } from 'react-router-config'
-import { Redirect, useHistory } from 'react-router'
-import { CURRENT_USER } from '@graphql/users/currentUser'
-import { CurrentUser } from '@graphql/users/__generated__/CurrentUser'
-
+import { useHistory } from 'react-router'
 import localStorageService from '@utils/localStorage'
-import { useApolloClient, useQuery } from '@apollo/client'
+// import { Redirect } from 'react-router'
+// import { CURRENT_USER } from '@graphql/users/currentUser'
+// import { CurrentUser } from '@graphql/users/__generated__/CurrentUser'
+// import { useApolloClient, useQuery } from '@apollo/client'
 
 function Layout(props: RouteConfigComponentProps) {
-  let currentUser: CurrentUser | null = null
+  // todo: current user check
+  // let currentUser: CurrentUser | null = null
   const token = localStorageService.token
 
   const history = useHistory()
-  const { readQuery } = useApolloClient()
+  // const { readQuery } = useApolloClient()
 
-  try {
-    const result = readQuery<CurrentUser>({ query: CURRENT_USER })
-    if (result) {
-      currentUser = result
-    }
-  } catch (e) {
-    //
-  }
+  // try {
+  //   const result = readQuery<CurrentUser>({ query: CURRENT_USER })
+  //   if (result) {
+  //     currentUser = result
+  //   }
+  // } catch (e) {
+  //   //
+  // }
 
-  const { loading, error } = useQuery<CurrentUser>(CURRENT_USER, {
-    skip: !!currentUser || !token,
-  })
+  // const { loading, error } = useQuery<CurrentUser>(CURRENT_USER, {
+  //   skip: !!currentUser || !token,
+  // })
 
   useLayoutEffect(() => {
     if (!token) {
@@ -33,13 +34,13 @@ function Layout(props: RouteConfigComponentProps) {
     }
   })
 
-  if (loading) {
-    return <p>loading</p>
-  }
-
-  if (error) {
-    return <Redirect to="/login" />
-  }
+  // if (loading) {
+  //   return <p>loading</p>
+  // }
+  //
+  // if (error) {
+  //   return <Redirect to="/login" />
+  // }
 
   return <>{renderRoutes(props.route!.routes)}</>
 }
