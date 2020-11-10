@@ -8,6 +8,9 @@ import { History } from 'history'
 import routes from './routes'
 import GlobalStyle from './globalStyle'
 
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './theme'
+
 interface Props {
   history: History
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,7 +22,9 @@ function App({ history, apolloClient }: Props) {
     <>
       <ApolloProvider client={apolloClient}>
         <GlobalStyle />
-        <Router history={history}>{renderRoutes(routes)}</Router>
+        <ThemeProvider theme={theme}>
+          <Router history={history}>{renderRoutes(routes)}</Router>
+        </ThemeProvider>
       </ApolloProvider>
     </>
   )

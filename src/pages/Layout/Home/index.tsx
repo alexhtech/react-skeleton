@@ -1,6 +1,7 @@
 import localStorageService from '@utils/localStorage'
 import React from 'react'
 import { useHistory } from 'react-router'
+import MainHeader from '@common/MainHeader/Header'
 
 function HomePage() {
   const history = useHistory()
@@ -11,6 +12,7 @@ function HomePage() {
   }
   return (
     <div>
+      <MainHeader />
       HomePage <button onClick={logout}>Logout</button>
     </div>
   )

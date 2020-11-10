@@ -5,21 +5,35 @@ import Login from '@pages/Entry/Login'
 import Layout from '@pages/Layout'
 import Home from '@pages/Layout/Home'
 
+const loginRoute = {
+  path: '/login',
+  component: Entry,
+  routes: [
+    {
+      path: '/login',
+      component: Login,
+    },
+  ],
+}
+
+const homeRoute = {
+  path: '/home',
+  component: Entry,
+  routes: [
+    {
+      path: '/home',
+      component: Login,
+    },
+  ],
+}
+
 const routes: RouteConfig[] = [
   {
     path: '/',
     component: Root,
     routes: [
-      {
-        path: '/login',
-        component: Entry,
-        routes: [
-          {
-            path: '/login',
-            component: Login,
-          },
-        ],
-      },
+      homeRoute,
+      loginRoute,
       {
         path: '/',
         component: Layout,

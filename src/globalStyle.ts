@@ -1,6 +1,15 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
+@font-face {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src:url(${'@assets/fonts/poppins-v15-latin-regular.woff2'}) format('woff2');
+        src:url(${'@assets/fonts/poppins-v15-latin-regular.woff'}) format('woff');
+        src: url(${'@assets/fonts/poppins-v15-latin-regular.ttf'});
+}
 html,
 body,
 div,

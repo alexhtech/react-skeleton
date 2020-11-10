@@ -1,7 +1,8 @@
-import React, { useLayoutEffect } from 'react'
+import React from // , {  useLayoutEffect}
+'react'
 import { RouteConfigComponentProps, renderRoutes } from 'react-router-config'
-import { useHistory } from 'react-router'
-import localStorageService from '@utils/localStorage'
+// import { useHistory } from 'react-router'
+// import localStorageService from '@utils/localStorage'
 // import { Redirect } from 'react-router'
 // import { CURRENT_USER } from '@graphql/users/currentUser'
 // import { CurrentUser } from '@graphql/users/__generated__/CurrentUser'
@@ -10,9 +11,9 @@ import localStorageService from '@utils/localStorage'
 function Layout(props: RouteConfigComponentProps) {
   // todo: current user check
   // let currentUser: CurrentUser | null = null
-  const token = localStorageService.token
+  // const token = localStorageService.token
 
-  const history = useHistory()
+  // const history = useHistory()
   // const { readQuery } = useApolloClient()
 
   // try {
@@ -28,11 +29,11 @@ function Layout(props: RouteConfigComponentProps) {
   //   skip: !!currentUser || !token,
   // })
 
-  useLayoutEffect(() => {
-    if (!token) {
-      history.replace('/login')
-    }
-  })
+  // useLayoutEffect(() => {
+  //   if (!token) {
+  //     history.replace('/login')
+  //   }
+  // })
 
   // if (loading) {
   //   return <p>loading</p>

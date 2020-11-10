@@ -56,6 +56,19 @@ module.exports = {
         },
       },
       {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'application/font-woff2',
+              name: 'font/[hash].[ext]',
+            },
+          },
+        ],
+      },
+      {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         exclude: /bg/,
         use: {
