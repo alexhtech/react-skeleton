@@ -10,23 +10,13 @@ const compiler = webpack(webpackConfig)
 
 const APP_DEV_SERVER_PORT = 3000
 
-app.use(
-  webpackDevMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath,
-    hot: true,
-    stats: {
-      colors: true,
-      children: false,
-    },
-    noInfo: true,
-  })
-)
+app.use(webpackDevMiddleware(compiler))
 app.use(webpackHotMiddleware(compiler))
 
 app.use('/static', express.static('./public/static'))
 
 app.use('*', function (req, res) {
-  interval = setInterval(() => {
+  let interval = setInterval(() => {
     compiler.outputFileSystem.readFile(path.join(compiler.outputPath, 'index.html'), function (err, file) {
       if (!err) {
         res.set('content-type', 'text/html')
@@ -38,6 +28,6 @@ app.use('*', function (req, res) {
   }, 10)
 })
 
-const server = app.listen(APP_DEV_SERVER_PORT, () => {
+app.listen(APP_DEV_SERVER_PORT, () => {
   console.log(`Page server is listening on port ${APP_DEV_SERVER_PORT}!`)
 })

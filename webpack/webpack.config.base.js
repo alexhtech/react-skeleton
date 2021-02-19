@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 const getClientEnvironment = require('./env')
 
@@ -9,9 +10,11 @@ const env = getClientEnvironment()
 
 const isDev = env.raw.NODE_ENV === 'development'
 
+const extensions = ['.tsx', '.ts', '.js', '.jsx']
+
 module.exports = {
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    extensions,
     alias: {
       '@common': resolve(__dirname, '../src/components/common/'),
       '@assets': resolve(__dirname, '../src/assets/'),
@@ -24,15 +27,24 @@ module.exports = {
     rules: [
       {
         test: /\.(j|t)sx?$/,
-        enforce: 'pre',
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.(j|t)sx?$/,
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: isDev,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            cacheDirectory: isDev,
+            presets: [
+              ['@babel/preset-env', { targets: { browsers: 'last 2 versions' } }],
+              '@babel/preset-typescript',
+              '@babel/preset-react',
+            ],
+            plugins: [
+              ['@babel/plugin-proposal-decorators', { legacy: true }],
+              ['@babel/plugin-proposal-class-properties', { loose: true }],
+              '@babel/plugin-proposal-optional-chaining',
+              '@babel/plugin-proposal-nullish-coalescing-operator',
+              isDev && require.resolve('react-refresh/babel'),
+            ].filter(Boolean),
+          },
         },
         exclude: /node_modules/,
       },
@@ -99,6 +111,11 @@ module.exports = {
     }),
     new ForkTsCheckerWebpackPlugin({
       async: isDev,
+    }),
+    new ESLintPlugin({
+      extensions,
+      threads: true,
+      lintDirtyModulesOnly: isDev,
     }),
   ],
 }

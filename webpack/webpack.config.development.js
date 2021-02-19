@@ -1,7 +1,8 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
-const merge = require('webpack-merge')
+const { merge } = require('webpack-merge')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const base = require('./webpack.config.base')
 
@@ -9,9 +10,7 @@ const development = merge(base, {
   mode: 'development',
   entry: ['@babel/polyfill', 'webpack-hot-middleware/client', './src/index'],
   resolve: {
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-    },
+    alias: {},
   },
   output: {
     path: resolve(__dirname, '../server/'),
@@ -26,9 +25,9 @@ const development = merge(base, {
     publicPath: '/',
   },
   optimization: {
-    noEmitOnErrors: true,
+    emitOnErrors: true,
   },
-  plugins: [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin(), new ProgressBarPlugin()],
+  plugins: [new webpack.HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin(), new ProgressBarPlugin()],
 })
 
 module.exports = development
