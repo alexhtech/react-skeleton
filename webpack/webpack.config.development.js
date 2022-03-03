@@ -8,7 +8,7 @@ const base = require('./webpack.config.base')
 
 const development = merge(base, {
   mode: 'development',
-  entry: ['@babel/polyfill', 'webpack-hot-middleware/client', './src/index'],
+  entry: ['webpack-hot-middleware/client', './src/index'],
   resolve: {
     alias: {},
   },

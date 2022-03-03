@@ -8,7 +8,7 @@ const { OUTPUT_PATH = '../public/dist', PUBLIC_PATH = '/dist/' } = process.env
 
 const production = merge(base, {
   mode: 'production',
-  entry: ['@babel/polyfill', './src/index'],
+  entry: ['./src/index'],
   output: {
     filename: '[name].[hash].js',
     path: resolve(__dirname, OUTPUT_PATH),

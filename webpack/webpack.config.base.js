@@ -15,13 +15,7 @@ const extensions = ['.tsx', '.ts', '.js', '.jsx']
 module.exports = {
   resolve: {
     extensions,
-    alias: {
-      '@common': resolve(__dirname, '../src/components/common/'),
-      '@assets': resolve(__dirname, '../src/assets/'),
-      '@pages': resolve(__dirname, '../src/pages/'),
-      '@components': resolve(__dirname, '../src/components/'),
-      '@hooks': resolve(__dirname, '../src/hooks/'),
-    },
+    alias: {},
   },
   module: {
     rules: [
@@ -30,18 +24,36 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
+            cacheDirectory: true,
             babelrc: false,
-            cacheDirectory: isDev,
             presets: [
-              ['@babel/preset-env', { targets: { browsers: 'last 2 versions' } }],
-              '@babel/preset-typescript',
-              '@babel/preset-react',
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'usage',
+                  corejs: {
+                    version: 3,
+                    proposals: true,
+                  },
+                  bugfixes: true,
+                  loose: true,
+                },
+              ],
+              ['@babel/preset-typescript', { allowNamespaces: true, onlyRemoveTypeImports: false }],
+              [
+                '@babel/preset-react',
+                {
+                  runtime: 'automatic',
+                },
+              ],
             ],
             plugins: [
+              'babel-plugin-transform-typescript-metadata',
               ['@babel/plugin-proposal-decorators', { legacy: true }],
               ['@babel/plugin-proposal-class-properties', { loose: true }],
-              '@babel/plugin-proposal-optional-chaining',
+              ['@babel/plugin-transform-runtime', { regenerator: true }],
               '@babel/plugin-proposal-nullish-coalescing-operator',
+              '@babel/plugin-proposal-optional-chaining',
               isDev && require.resolve('react-refresh/babel'),
             ].filter(Boolean),
           },
