@@ -1,4 +1,4 @@
-const fs = require('fs')
+import fs from 'fs'
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -13,7 +13,7 @@ const dotenvFiles = [
   `${dotenvFileName}.${NODE_ENV}`,
   NODE_ENV !== 'test' && `${dotenvFileName}.local`,
   dotenvFileName,
-].filter(Boolean)
+].filter((file: unknown): file is string => file !== false)
 
 dotenvFiles.forEach((dotenvFile) => {
   if (fs.existsSync(dotenvFile)) {
@@ -25,7 +25,7 @@ dotenvFiles.forEach((dotenvFile) => {
 
 const APP = /^APP_/i
 
-function getClientEnvironment() {
+export const getClientEnvironment = () => {
   const raw = Object.keys(process.env)
     .filter((key) => APP.test(key))
     .reduce(
@@ -47,5 +47,3 @@ function getClientEnvironment() {
 
   return { raw, stringified }
 }
-
-module.exports = getClientEnvironment

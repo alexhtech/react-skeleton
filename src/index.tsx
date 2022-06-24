@@ -1,10 +1,13 @@
-import * as React from 'react'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 
-import App from './App'
+import { App } from './App'
 
-function renderApp() {
-  render(<App />, document.getElementById('react-root'))
+const rootEl = document.getElementById('react-root')
+
+if (!rootEl) {
+  throw new Error('No root element found')
 }
 
-renderApp()
+const root = createRoot(rootEl)
+
+root.render(<App />)

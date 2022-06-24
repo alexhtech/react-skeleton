@@ -1,6 +1,0 @@
-{
-    "src/**/*.{ts,tsx,js,jsx}": [
-      "yarn code:lint --fix",
-      "pretty-quick --staged",
-    ]
-}
